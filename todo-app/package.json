@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "watch" : "nodemon server",
+    "watch": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
+    "mongodb": "^4.3.1",
     "nodemon": "^2.0.15"
   }
 }
