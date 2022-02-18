@@ -4,6 +4,8 @@ let {MongoClient} = require('mongodb')
 let app = express()
 let db
 
+app.use(express.static('public'))
+
 async function go(){
     let client = new MongoClient('mongodb+srv://todoApp:asa1234@cluster0.gycof.mongodb.net/TodoApp?retryWrites=true&w=majority')
     await client.connect()
@@ -12,8 +14,9 @@ async function go(){
 }
 
 go()
-
+app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+
 app.get('/', function(req, res){
   db.collection('items').find().toArray(function(err, items){
     res.send(`<!DOCTYPE html>
@@ -50,7 +53,8 @@ app.get('/', function(req, res){
         </ul>
         
       </div>
-      
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/browser.js"></script>
     </body>
     </html>`)
   })
@@ -63,4 +67,8 @@ app.post('/create-item', function(req, res){
     })
 })
 
+app.post('/update-item', function(req, res){
+  console.log(req.body.text)
+  res.send('Succes')
+})
 
