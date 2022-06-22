@@ -4,6 +4,7 @@ const req = require('express/lib/request')
 const res = require('express/lib/response')
 const fs = require('fs')
 const http = require('http')
+const url = require('url')
 
 /* const textIn = fs.readFileSync('./starter/txt/input.txt', 'utf-8')
 console.log(textIn)
@@ -23,7 +24,19 @@ console.log("Will read file!") */
 /* HTTP Server */
 
 const server = http.createServer((req, res) =>{
-    res.end('Hello from the server!')
+    /* console.log(req.url) */
+    const pathName = req.url
+
+    if (pathName === '/' || pathName === '/overview') {
+        res.end('This is the Overview!')
+    }else if(pathName === '/product'){
+        res.end('This is the Product!')
+    }else{
+        res.writeHead(404, {
+            'Content-type':'text/html'
+        })
+        res.end('<h1>This page not exist!</h1>')
+    }
 })
 
 server.listen(8000, '127.0.0.1', () => {
