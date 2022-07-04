@@ -4,8 +4,10 @@ const req = require('express/lib/request')
 const res = require('express/lib/response')
 const fs = require('fs')
 const http = require('http')
+/* const { default: slugify } = require('slugify') */
 const url = require('url')
 const replaceTemplate = require('./starter/modules-js/replaceTemplate')
+const slugify = require('slugify');
 
 /* const textIn = fs.readFileSync('./starter/txt/input.txt', 'utf-8')
 console.log(textIn)
@@ -30,7 +32,9 @@ const tempProduct = fs.readFileSync(`${__dirname}/starter/templates/template-pro
 const data = fs.readFileSync(`${__dirname}/starter/dev-data/data.json`, 'utf-8')
 const dataObj = JSON.parse(data)
 
-
+const slugs = dataObj.map(el => slugify(el.productName, { lower: true}))
+console.log(slugs)
+/* console.log(slugify('Fresh Avocados', { lower: true })) */
 const server = http.createServer((req, res) =>{
 
     const { query, pathname } = url.parse(req.url, true)
