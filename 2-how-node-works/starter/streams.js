@@ -27,6 +27,7 @@ server.on('request', (req, res) => {
     readable.pipe(res)
 })
 
+//function for listen the node server
 server.listen(8000, "127.0.0.1", () => {
     console.log("Listening...")
 })
